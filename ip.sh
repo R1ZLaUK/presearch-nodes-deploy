@@ -44,4 +44,4 @@ do
 
    count=$((count+1))
 done
-docker run -d --name presearch-auto-updater-prod --restart=unless-stopped --net docker_presearch --ip 172.19.0.3 -v /var/run/docker.sock:/var/run/docker.sock presearch/auto-updater --cleanup --interval 900 presearch-auto-updater psn-prod20 psn-prod21 psn-prod22 psn-prod23 psn-prod24 psn-prod25 psn-prod26 psn-prod27 psn-prod28 psn-prod29 psn-prod30 psn-prod31 psn-prod32 psn-prod33 psn-prod34
+docker run -d --name presearch-auto-updater-prod --restart=unless-stopped --net docker_presearch --ip 172.19.0.3 -v /var/run/docker.sock:/var/run/docker.sock presearch/auto-updater --cleanup --interval 900 presearch-auto-updater psn-prod20 psn-prod21 psn-prod22 psn-prod23 psn-prod24 psn-prod25 psn-prod26 psn-prod27 psn-prod28 psn-prod29 psn-prod30 psn-prod31 psn-prod32 psn-prod33 psn-prod34 iptables-save
