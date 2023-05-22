@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo apt update && sudo apt upgrade -y
 sudo apt-get install unattended-upgrades
 sudo dpkg-reconfigure unattended-upgrades -y
 curl -fsSL https://get.docker.com -o get-docker.sh
