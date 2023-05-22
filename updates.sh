@@ -1,1 +1,10 @@
+#!/bin/bash
 
+# Update package lists and upgrade installed packages
+sudo apt update && sudo apt upgrade -y
+
+# Install unattended-upgrades package
+sudo apt-get install -y unattended-upgrades
+
+# Configure unattended-upgrades
+sudo dpkg-reconfigure -plow unattended-upgrades
