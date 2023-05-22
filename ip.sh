@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo apt-get install unattended-upgrades
+sudo dpkg-reconfigure unattended-upgrades -y
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo docker run -d --name presearch-auto-updater --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock presearch/auto-updater --cleanup --interval 900 presearch-auto-updater presearch-node
