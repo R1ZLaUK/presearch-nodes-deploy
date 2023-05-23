@@ -3,14 +3,9 @@
 # Set DEBIAN_FRONTEND to noninteractive to automatically accept prompts
 export DEBIAN_FRONTEND=noninteractive
 
-# Install unattended-upgrades package
-sudo apt-get install -y unattended-upgrades
-
 # Enable unattended-upgrades by configuring the package
-sudo tee /etc/apt/apt.conf.d/20auto-upgrades <<EOF
-APT::Periodic::Update-Package-Lists "1";
-APT::Periodic::Unattended-Upgrade "1";
-EOF
+sudo sed -i 's/\/\/\s*"\${distro_id}:\${distro_codename}-updates";/        "\${distro_id}:\${distro_codename}-updates";/' /etc/apt/apt.conf.d/50unattended-upgrades
+sudo sed -i 's/\/\/\s*"\${distro_id}:\${distro_codename}-security";/        "\${distro_id}:\${distro_codename}-security";/' /etc/apt/apt.conf.d/50unattended-upgrades
 
 # Perform initial cleanup of unneeded packages
 sudo apt-get autoremove --purge -y
