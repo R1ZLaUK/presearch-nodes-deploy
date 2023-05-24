@@ -3,6 +3,12 @@
 # Update the system
 sudo apt update && sudo apt upgrade -y
 
+# Check if curl is installed
+if ! [ -x "$(command -v curl)" ]; then
+  echo "curl is not installed. Installing curl..."
+  sudo apt install -y curl
+fi
+
 # Install required packages for building Presearch node
 sudo apt install -y build-essential git libssl-dev libudev-dev pkg-config npm
 
@@ -39,6 +45,11 @@ sudo docker logs -f presearch-node
 sudo sed -i 's/\/\/\s*"\${distro_id}:\${distro_codename}-updates";/        "\${distro_id}:\${distro_codename}-updates";/' /etc/apt/apt.conf.d/50unattended-upgrades
 sudo sed -i 's/\/\/\s*"\${distro_id}:\${distro_codename}-security";/        "\${distro_id}:\${distro_codename}-security";/' /etc/apt/apt.conf.d/50unattended-upgrades
 
+# Modify unattended-upgrades configuration to automatically accept kernel updates
+sudo sed -i 's/\/\/\s*"${distro_id}:${distro_codename}-security";/        "${distro_id}:${distro_codename}-security";/' /etc/apt/apt.conf.d/50unattended-upgrades
+sudo sed -i 's/\/\/\s*"${distro_id}:${distro_codename}-updates";/        "${distro_id}:${distro_codename}-updates";/' /etc/apt/apt.conf.d/50unattended-upgrades
+echo 'unattended-upgrades unattended-upgrades/accept-kernel-security-updates boolean true' | sudo debconf-set-selections
+
 # Perform initial cleanup of unneeded packages
 sudo apt-get autoremove --purge -y
 
@@ -47,4 +58,3 @@ sudo apt-get autoremove --purge -y
 
 # Reboot the system
 sudo reboot
-
